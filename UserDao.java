@@ -2,8 +2,11 @@ package ca.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
+import caclass.ConnectionUtil;
 import caclass.RegisterUser;
 
 
@@ -29,8 +32,39 @@ import caclass.RegisterUser;
 				pstmt.close();
 				con.close();
 		    }
+
+	
+		public String loginUser(String UserName,String UserPassword)
+		{
+			String loginQuery="select * from User_Table where User_Name='"+UserName+"' and  User_Password='"+UserPassword+"'" ;
+			//String loginQuery1="select * from user_cafe where User_Password="+UserPassword;
+			RegisterUser user=null;	
 			
+			try {
+				Connection con=ConnectionUtil.getDBConnect();
+				Statement stmt=con.createStatement();
+				ResultSet rs=stmt.executeQuery(loginQuery);
+				//ResultSet rs1=stmt.executeQuery(loginQuery1);
+				if(rs.next())
+				{
+				
+				return rs.getString(2);
+				}
+				else
+				{
+					System.out.println("username and password not valid");
+				}
+				
+			} 
 			
+			catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+				
+			
+		}
 	}
 
 		
