@@ -1,11 +1,15 @@
 
-create table User_Table(User_Id int generated always as identity start with 1 Primary key, 
+create table user_details(User_Id int generated always as identity start with 1 Primary key, 
 User_Name varchar2(50), 
 Email varchar2(50), 
 Mobile_Number int, 
 User_Password varchar2(50));
 
-create table admin_detail (Admin_Id int Primary key, 
+select * from User_Table;
+drop table User_Table;
+delete from User_Table where User_Password='sasi@9222';
+
+create table admin_details(Admin_Id int Primary key, 
 Admin_Name varchar2(50), 
 Admin_Password varchar2(50));
 
@@ -18,9 +22,9 @@ SSLC_Mark int,
 HSC_Mark int,  
 Address varchar2(100), 
 City varchar2(50), 
-U_State varchar2(40), 
+User_State varchar2(40), 
 Nationality varchar2(40),
-U_Degree varchar(40));
+Course varchar(40));
 
 create table course_details(Course_Id int primary key,
 Course_Type varchar2(30) constraint course_type_cons check (Course_Type IN ('UG','PG')),
